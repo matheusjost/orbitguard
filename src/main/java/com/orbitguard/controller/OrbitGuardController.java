@@ -1,4 +1,4 @@
 package com.orbitguard.controller;
 
-public class AppController {
+public class OrbitGuardController {
 }
