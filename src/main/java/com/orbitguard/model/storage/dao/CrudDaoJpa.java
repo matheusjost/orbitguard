@@ -1,5 +1,6 @@
 package com.orbitguard.model.storage.dao;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 /**
@@ -18,25 +19,68 @@ public abstract class CrudDaoJpa<T> extends Dao<T> implements CrudDao<T> {
     }
     @Override
     public void create(T entity) {
-        getEntityManager().persist(entity);
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(entity);
+            em.getTransaction().commit();
+        } catch (RuntimeException e) {
+            em.getTransaction().rollback();
+            throw e;
+        } finally {
+            em.close();
+        }
     }
     @Override
     public void update(T entity) {
-        getEntityManager().merge(entity);
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.merge(entity);
+            em.getTransaction().commit();
+        } catch (RuntimeException e) {
+            em.getTransaction().rollback();
+            throw e;
+        } finally {
+            em.close();
+        }
     }
     @Override
     public void remove(T entity) {
-        getEntityManager().remove(getEntityManager().merge(entity));
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            if (!em.contains(entity)) {
+                entity = em.merge(entity);
+            }
+            em.remove(entity);
+            em.getTransaction().commit();
+        } catch (RuntimeException e) {
+            em.getTransaction().rollback();
+            throw e;
+        } finally {
+            em.close();
+        }
     }
     @Override
     public T find(Object id) {
-        return getEntityManager().find(getEntityClass(), id);
+        EntityManager em = getEntityManager();
+        try {
+            return em.find(getEntityClass(), id);
+        } finally {
+            em.close();
+        }
     }
     @Override
     public List<T> findAll() {
-        javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
-        cq.select(cq.from(getEntityClass()));
-        return getEntityManager().createQuery(cq).getResultList();
+        EntityManager em = getEntityManager();
+        try {
+            javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            cq.select(cq.from(getEntityClass()));
+            return em.createQuery(cq).getResultList();
+        } finally {
+            em.close();
+        }
     }
 
 }
