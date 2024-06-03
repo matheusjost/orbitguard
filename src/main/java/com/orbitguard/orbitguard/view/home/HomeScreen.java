@@ -1,6 +1,8 @@
-package com.orbitguard.orbitguard.view;
+package com.orbitguard.orbitguard.view.home;
 
 import com.orbitguard.orbitguard.controller.OrbitGuardController;
+import com.orbitguard.orbitguard.view.home.components.HomeMenuBar;
+
 import jakarta.annotation.PostConstruct;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -20,19 +22,13 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 @Component
-public class OrbitGuardFrame extends JFrame {
+public class HomeScreen extends JFrame {
 
     private JPanel pnlDthAtual, pnlGrafico, pnlLista, pnlCentro;
     private JLabel lblHora, lblData;
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-    private Date dth = new Date(System.currentTimeMillis());
-    private int hr, min, sec;
+    private int hr, min, sec, dia, mes, ano;
     private Calendar horarioAtual;
     private DecimalFormat formato;
-
-    private JMenuBar menuBar = new JMenuBar();
-    private JMenu arquivo, ajuda, dados, config;
-    private JMenuItem dashboard, sair, atualizarDados, resultados, preferencias, sobre;
 
     @Autowired
     private OrbitGuardController controller;
@@ -49,8 +45,8 @@ public class OrbitGuardFrame extends JFrame {
         BorderLayout layout = new BorderLayout();
         geral.setLayout(layout);
 
-        adicionaMenuBar();
-        adicionaRodape();
+        this.setJMenuBar(new HomeMenuBar()); // Adiciona o componente de MenuBar
+        adicionaRodape(); // Adiciona rodapé com horário e data atuais
 
         pnlGrafico = new JPanel();
         pnlGrafico.setBackground(Color.GRAY);
@@ -66,36 +62,13 @@ public class OrbitGuardFrame extends JFrame {
         geral.add(pnlDthAtual, BorderLayout.PAGE_END);
     }
 
-    private void adicionaMenuBar() {
-        arquivo = new JMenu("Arquivo");
-        dashboard = new JMenuItem("Dashboard");
-        sair = new JMenuItem("Sair");
-        arquivo.add(dashboard);
-        arquivo.add(sair);
-        dados = new JMenu("Dados");
-        atualizarDados = new JMenuItem("Atualizar Dados");
-        resultados = new JMenuItem("Resultados");
-        dados.add(atualizarDados);
-        dados.add(resultados);
-        config = new JMenu("Configurações");
-        preferencias = new JMenuItem("Preferências");
-        config.add(preferencias);
-        ajuda = new JMenu("Ajuda");
-        sobre = new JMenuItem("Sobre");
-        ajuda.add(sobre);
-        menuBar.add(arquivo);
-        menuBar.add(dados);
-        menuBar.add(config);
-        menuBar.add(ajuda);
-        this.setJMenuBar(menuBar);
-    }
-
     private void adicionaRodape() {
+        horarioAtual = Calendar.getInstance();
         pnlDthAtual = new JPanel(new GridLayout(1, 2));
         pnlDthAtual.setBackground(Color.WHITE);
         pnlDthAtual.setBorder(new EmptyBorder(10, 180, 10, 10));
         lblData = new JLabel();
-        lblData.setText("Data: " + dateFormat.format(dth));
+        setDataAtual();
         lblData.setFont(new Font("Times New Roman", Font.BOLD, 32));
         lblHora = new JLabel();
         Timer time = new Timer(1000, ativarTimer);
@@ -106,15 +79,22 @@ public class OrbitGuardFrame extends JFrame {
         pnlDthAtual.add(lblData);
     }
 
+    private void setDataAtual() {
+        dia = horarioAtual.get(Calendar.DATE);
+        mes = horarioAtual.get(Calendar.MONTH);
+        ano = horarioAtual.get(Calendar.YEAR);
+        lblData.setText("Data: " + formatarDecimal(dia) + "/" + formatarDecimal(mes) + "/"
+                + formatarDecimal(ano));
+    }
+
     private void setHorarioAtual() {
-        horarioAtual = Calendar.getInstance();
         hr = horarioAtual.get(Calendar.HOUR_OF_DAY);
         min = horarioAtual.get(Calendar.MINUTE);
         sec = horarioAtual.get(Calendar.SECOND);
-        lblHora.setText("Horário: " + formatarHorario(hr) + ":" + formatarHorario(min) + ":" + formatarHorario(sec));
+        lblHora.setText("Horário: " + formatarDecimal(hr) + ":" + formatarDecimal(min) + ":" + formatarDecimal(sec));
     }
 
-    private String formatarHorario(int num) {
+    private String formatarDecimal(int num) {
         formato = new DecimalFormat("00");
         return formato.format(num);
     }
