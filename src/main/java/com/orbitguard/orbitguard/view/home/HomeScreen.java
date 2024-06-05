@@ -1,7 +1,8 @@
 package com.orbitguard.orbitguard.view.home;
 
 import com.orbitguard.orbitguard.controller.OrbitGuardController;
-import com.orbitguard.orbitguard.view.home.components.HomeMenuBar;
+import com.orbitguard.orbitguard.view.home.components.GraficoAtividadeRecentes;
+import com.orbitguard.orbitguard.view.home.components.MenuBar;
 
 import jakarta.annotation.PostConstruct;
 import java.awt.BorderLayout;
@@ -12,9 +13,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +23,7 @@ import javax.swing.border.EmptyBorder;
 @Component
 public class HomeScreen extends JFrame {
 
-    private JPanel pnlDthAtual, pnlGrafico, pnlLista, pnlCentro;
+    private JPanel pnlDthAtual, pnlLista, pnlCentro;
     private JLabel lblHora, lblData;
     private int hr, min, sec, dia, mes, ano;
     private Calendar horarioAtual;
@@ -45,17 +44,14 @@ public class HomeScreen extends JFrame {
         BorderLayout layout = new BorderLayout();
         geral.setLayout(layout);
 
-        this.setJMenuBar(new HomeMenuBar()); // Adiciona o componente de MenuBar
-        adicionaRodape(); // Adiciona rodapé com horário e data atuais
-
-        pnlGrafico = new JPanel();
-        pnlGrafico.setBackground(Color.GRAY);
+        this.setJMenuBar(new MenuBar()); // Adiciona o componente de MenuBar
+        this.adicionaRodape(); // Adiciona rodapé com horário e data atuais
 
         pnlLista = new JPanel();
         pnlLista.setBackground(Color.GRAY);
 
         pnlCentro = new JPanel(new GridLayout(1, 2));
-        pnlCentro.add(pnlGrafico);
+        pnlCentro.add(new GraficoAtividadeRecentes());
         pnlCentro.add(pnlLista);
 
         geral.add(pnlCentro, BorderLayout.CENTER);
