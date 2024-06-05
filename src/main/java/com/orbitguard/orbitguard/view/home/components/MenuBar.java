@@ -4,12 +4,12 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-public class HomeMenuBar extends JMenuBar {
+public class MenuBar extends JMenuBar {
 
     private JMenu arquivo, ajuda, dados, config;
     private JMenuItem dashboard, sair, atualizarDados, resultados, preferencias, sobre;
 
-    public HomeMenuBar() {
+    public MenuBar() {
         arquivo = new JMenu("Arquivo");
         dashboard = new JMenuItem("Dashboard");
         sair = new JMenuItem("Sair");
