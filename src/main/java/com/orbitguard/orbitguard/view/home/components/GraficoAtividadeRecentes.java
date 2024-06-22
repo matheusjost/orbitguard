@@ -3,6 +3,7 @@ package com.orbitguard.orbitguard.view.home.components;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 
 import javax.swing.JPanel;
 
@@ -11,6 +12,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.StandardChartTheme;
 import org.jfree.chart.renderer.category.StandardBarPainter;
+import org.jfree.chart.title.TextTitle;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.data.category.DefaultCategoryDataset;
 
@@ -20,7 +22,7 @@ public class GraficoAtividadeRecentes extends JPanel {
         this.setLayout(new BorderLayout(10, 10));
         this.setBackground(Color.GRAY);
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-         //    PARTE ONDE SETA VALORES DO GRAFICO , USAR MODEL PARA POPULAR FUTURAMENTE
+        // PARTE ONDE SETA VALORES DO GRAFICO , USAR MODEL PARA POPULAR FUTURAMENTE
         dataset.addValue(1, "meteoro", "18-06");
         dataset.addValue(3, "meteoro", "19-06");
         dataset.addValue(5, "meteoro", "20-06");
@@ -46,6 +48,7 @@ public class GraficoAtividadeRecentes extends JPanel {
         theme.setGridBandPaint(Color.red);
         theme.setAxisOffset(new RectangleInsets(0, 0, 0, 0));
         theme.setBarPainter(new StandardBarPainter());
+        theme.setRegularFont(new Font("Serif", Font.PLAIN, 22));
         theme.setAxisLabelPaint(Color.WHITE);
         theme.apply(chart);
         chart.getCategoryPlot().setOutlineVisible(false);

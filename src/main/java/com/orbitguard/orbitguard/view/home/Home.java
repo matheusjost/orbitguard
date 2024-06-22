@@ -7,37 +7,41 @@ package com.orbitguard.orbitguard.view.home;
 import com.orbitguard.orbitguard.controller.OrbitGuardController;
 import com.orbitguard.orbitguard.view.home.components.GraficoAtividadeRecentes;
 import com.orbitguard.orbitguard.view.home.components.Rodape;
+import com.orbitguard.orbitguard.view.sobre.Sobre;
 
 import jakarta.annotation.PostConstruct;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.nio.file.FileSystems;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
-import javax.swing.table.JTableHeader;
 
 @Component
 public class Home extends JFrame {
 
-    private JPanel pnlListaCount, pnlCentro;
+    private JPanel pnlListaCount, pnlCentro, pnlMain;
     private JMenuBar menu;
     private JMenu arquivo, ajuda, dados, config;
     private JMenuItem dashboard, sair, atualizarDados, resultados, preferencias, sobre;
     private JLabel lblTituloLista, lblCountObjProx;
-    private String[] colunas = new String[]{"Nome do Obj", "Data de aproximação", "Distancia min prev", "Risco"};
+    private String[] colunas = new String[] { "Nome do Obj", "Data de aproximação", "Distancia min prev", "Risco" };
     private JTable listaObjProx;
-    private Object[][] dadosListaObj = new Object[3][4];
-    ;
-    
+    private Object[][] dadosListaObj = new Object[3][4];;
+
     @Autowired
     private OrbitGuardController controller;
 
     @PostConstruct
     public void init() {
+
         this.setSize(1300, 700);
         this.setTitle("Orbitguard - Programação Avançada");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,21 +49,24 @@ public class Home extends JFrame {
         this.setVisible(true);
         Container geral = this.getContentPane();
         BorderLayout layout = new BorderLayout();
-        geral.setLayout(layout);
-
+        pnlMain = new JPanel();
+        pnlMain.setLayout(layout);
         MenuBar();
         ListaObjetosProx();
-        
-        pnlCentro = new JPanel(new GridLayout(1, 2));
+
+        pnlCentro = new JPanel(new GridLayout(1, 3));
         pnlCentro.add(new GraficoAtividadeRecentes());
         pnlCentro.add(pnlListaCount);
 
-        geral.add(pnlCentro, BorderLayout.CENTER);
-        geral.add(new Rodape(), BorderLayout.PAGE_END);
+        pnlMain.add(pnlCentro, BorderLayout.CENTER);
+        pnlMain.add(new Rodape(), BorderLayout.PAGE_END);
+        geral.add(pnlMain);
     }
 
     private void ListaObjetosProx() {
-        lblTituloLista = new JLabel("Lista Objetos Prox");
+        lblTituloLista = new JLabel("Lista Objetos Próximos");
+        lblTituloLista.setFont(new Font("Serif", Font.PLAIN, 22));
+        lblTituloLista.setSize(20, 20);
         lblTituloLista.setAlignmentX(CENTER_ALIGNMENT);
         pnlListaCount = new JPanel(new BorderLayout());
         // POPULAR DADOSLISTAOBJ COM O MODEL FUTURAMENTE
@@ -73,19 +80,27 @@ public class Home extends JFrame {
         dadosListaObj[1][3] = "teste";
         listaObjProx = new JTable(dadosListaObj, colunas);
         JScrollPane scroll = new JScrollPane(listaObjProx);
-        
-        lblCountObjProx = new JLabel("Numero de Objetos Proximos da Terra: " + 10000);
+
+        lblCountObjProx = new JLabel("Numero de Objetos Próximos da Terra: " + 10000);
+        lblCountObjProx.setFont(new Font("Serif", Font.PLAIN, 24));
         pnlListaCount.add(lblTituloLista, BorderLayout.PAGE_START);
         pnlListaCount.add(scroll, BorderLayout.CENTER);
         pnlListaCount.add(lblCountObjProx, BorderLayout.PAGE_END);
-
     }
 
     private void MenuBar() {
         menu = new JMenuBar();
+        Icon homeIcon = new ImageIcon((FileSystems.getDefault().getPath("")).toAbsolutePath().toString()
+                + "src/main/java/com/orbitguard/orbitguard/view/assets/icons/home.svg");
+        JButton home = new JButton("", homeIcon);
+
+        home.addActionListener((ActionEvent e) -> this.dispose());
+        home.setBackground(Color.red);
+
         arquivo = new JMenu("Arquivo");
         dashboard = new JMenuItem("Dashboard");
         sair = new JMenuItem("Sair");
+        sair.addActionListener((ActionEvent e) -> this.dispose());
         arquivo.add(dashboard);
         arquivo.add(sair);
         dados = new JMenu("Dados");
@@ -98,11 +113,24 @@ public class Home extends JFrame {
         config.add(preferencias);
         ajuda = new JMenu("Ajuda");
         sobre = new JMenuItem("Sobre");
+        sobre.addActionListener((ActionEvent $e) -> {
+            showJPanel(new Sobre());
+        });
         ajuda.add(sobre);
+
+        menu.add(home);
         menu.add(arquivo);
         menu.add(dados);
         menu.add(config);
         menu.add(ajuda);
         setJMenuBar(menu);
+
+    }
+
+    private void showJPanel(java.awt.Component com) {
+        pnlMain.removeAll();
+        pnlMain.add(com);
+        pnlMain.repaint();
+        pnlMain.revalidate();
     }
 }
