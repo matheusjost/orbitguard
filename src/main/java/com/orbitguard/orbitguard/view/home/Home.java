@@ -5,6 +5,7 @@
 package com.orbitguard.orbitguard.view.home;
 
 import com.orbitguard.orbitguard.controller.OrbitGuardController;
+import com.orbitguard.orbitguard.view.dashboard.Dashboard;
 import com.orbitguard.orbitguard.view.home.components.GraficoAtividadeRecentes;
 import com.orbitguard.orbitguard.view.home.components.Rodape;
 import com.orbitguard.orbitguard.view.sobre.Sobre;
@@ -27,7 +28,7 @@ import javax.swing.*;
 @Component
 public class Home extends JFrame {
 
-    private JPanel pnlListaCount, pnlCentro, pnlMain;
+    private JPanel pnlListaCount, pnlCentro, pnlMain, pnlHome;
     private JMenuBar menu;
     private JMenu arquivo, ajuda, dados, config;
     private JMenuItem dashboard, sair, atualizarDados, resultados, preferencias, sobre;
@@ -94,11 +95,16 @@ public class Home extends JFrame {
                 + "src/main/java/com/orbitguard/orbitguard/view/assets/icons/home.svg");
         JButton home = new JButton("", homeIcon);
 
-        home.addActionListener((ActionEvent e) -> this.dispose());
+        home.addActionListener((ActionEvent e) -> {
+            showJPanel(this.pnlMain);
+        });
         home.setBackground(Color.red);
 
         arquivo = new JMenu("Arquivo");
         dashboard = new JMenuItem("Dashboard");
+        dashboard.addActionListener((ActionEvent $e) -> {
+            showJPanel(new Dashboard());
+        });
         sair = new JMenuItem("Sair");
         sair.addActionListener((ActionEvent e) -> this.dispose());
         arquivo.add(dashboard);
@@ -128,9 +134,9 @@ public class Home extends JFrame {
     }
 
     private void showJPanel(java.awt.Component com) {
-        pnlMain.removeAll();
-        pnlMain.add(com);
-        pnlMain.repaint();
-        pnlMain.revalidate();
+        getContentPane().removeAll();
+        getContentPane().add(com);
+        getContentPane().repaint();
+        getContentPane().revalidate();
     }
 }

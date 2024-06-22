@@ -8,7 +8,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
 public class OrbitguardApplication {
-
     public static void main(String[] args) {
         FlatDarculaLaf.setup();
         ConfigurableApplicationContext ctx = new SpringApplicationBuilder(OrbitguardApplication.class)
