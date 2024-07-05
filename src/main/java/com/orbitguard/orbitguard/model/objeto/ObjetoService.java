@@ -16,8 +16,8 @@ public class ObjetoService {
     private ObjetoRepository repository;
     private final String NASA_NEO_API_BASE_URL = "https://api.nasa.gov/neo/rest/v1/feed";
 
-    public Objeto save(Objeto example) {
-        return repository.save(example);
+    public Objeto save(Objeto obj) {
+        return repository.save(obj);
     }
 
     public String apiCallTest() {

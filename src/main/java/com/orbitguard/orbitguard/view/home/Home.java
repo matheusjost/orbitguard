@@ -5,6 +5,7 @@
 package com.orbitguard.orbitguard.view.home;
 
 import com.orbitguard.orbitguard.controller.OrbitGuardController;
+import com.orbitguard.orbitguard.model.objeto.ObjetoService;
 import com.orbitguard.orbitguard.view.dashboard.Dashboard;
 import com.orbitguard.orbitguard.view.home.components.GraficoAtividadeRecentes;
 import com.orbitguard.orbitguard.view.home.components.Rodape;
@@ -97,14 +98,14 @@ public class Home extends JFrame {
         JButton home = new JButton("", homeIcon);
 
         home.addActionListener((ActionEvent e) -> {
-            showJPanel(this.pnlMain);
+            showJPanel(new GraficoAtividadeRecentes());
         });
         home.setBackground(Color.red);
 
         arquivo = new JMenu("Arquivo");
         dashboard = new JMenuItem("Dashboard");
         dashboard.addActionListener((ActionEvent $e) -> {
-            showJPanel(new Dashboard());
+            showJPanel(new GraficoAtividadeRecentes());
         });
         sair = new JMenuItem("Sair");
         sair.addActionListener((ActionEvent e) -> this.dispose());
@@ -112,6 +113,9 @@ public class Home extends JFrame {
         arquivo.add(sair);
         dados = new JMenu("Dados");
         atualizarDados = new JMenuItem("Atualizar Dados");
+        atualizarDados.addActionListener((e) -> {
+            new ObjetoService().apiCallTest();
+        });
         resultados = new JMenuItem("Resultados");
         resultados.addActionListener((e) -> {
             showJPanel(new Results());

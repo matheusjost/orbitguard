@@ -1,5 +1,6 @@
 package com.orbitguard.orbitguard.view.results;
 
+import com.orbitguard.orbitguard.model.objeto.Objeto;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
