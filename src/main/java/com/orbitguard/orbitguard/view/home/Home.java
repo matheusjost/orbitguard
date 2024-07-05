@@ -8,6 +8,7 @@ import com.orbitguard.orbitguard.controller.OrbitGuardController;
 import com.orbitguard.orbitguard.view.dashboard.Dashboard;
 import com.orbitguard.orbitguard.view.home.components.GraficoAtividadeRecentes;
 import com.orbitguard.orbitguard.view.home.components.Rodape;
+import com.orbitguard.orbitguard.view.results.Results;
 import com.orbitguard.orbitguard.view.sobre.Sobre;
 
 import jakarta.annotation.PostConstruct;
@@ -112,6 +113,9 @@ public class Home extends JFrame {
         dados = new JMenu("Dados");
         atualizarDados = new JMenuItem("Atualizar Dados");
         resultados = new JMenuItem("Resultados");
+        resultados.addActionListener((e) -> {
+            showJPanel(new Results());
+        });
         dados.add(atualizarDados);
         dados.add(resultados);
         config = new JMenu("Configurações");

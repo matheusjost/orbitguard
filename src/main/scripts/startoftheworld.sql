@@ -1,8 +1,12 @@
 CREATE DATABASE orbitguard;
 
 -- EXAMPLE TABLE
-CREATE TABLE example(
+CREATE TABLE objeto (
     id int auto_increment,
     nome varchar(255),
+    distancia double,
+    velocidade double,
+    tamanho double,
+    potencial_risco boolean,
     primary key (id)
 );

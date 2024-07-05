@@ -1,4 +1,4 @@
-package com.orbitguard.orbitguard.model.example;
+package com.orbitguard.orbitguard.model.objeto;
 
 import com.orbitguard.orbitguard.EnvConfig;
 import com.orbitguard.orbitguard.model.http.HttpRequests;
@@ -11,12 +11,12 @@ import java.util.Map;
 
 @Service
 @Transactional
-public class ExampleService {
+public class ObjetoService {
     @Autowired
-    private ExampleRepository repository;
+    private ObjetoRepository repository;
     private final String NASA_NEO_API_BASE_URL = "https://api.nasa.gov/neo/rest/v1/feed";
 
-    public Example save(Example example) {
+    public Objeto save(Objeto example) {
         return repository.save(example);
     }
 
