@@ -6,8 +6,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HttpUtils {
-    public static Map<String, String> createParams(String name, String val) {
-        Map<String, String> params = new HashMap<>();
+    public static Map<String, String> createParams(String name, String val, Map<String, String> params) {
+        if (params == null) {
+            params = new HashMap<>();
+        }
 
         params.put(name, val);
         return params;

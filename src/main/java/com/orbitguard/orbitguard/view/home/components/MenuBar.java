@@ -1,6 +1,7 @@
 package com.orbitguard.orbitguard.view.home.components;
 
 import com.orbitguard.orbitguard.model.objeto.ObjetoService;
+import com.orbitguard.orbitguard.view.home.HomePanel;
 import com.orbitguard.orbitguard.view.results.Results;
 import com.orbitguard.orbitguard.view.sobre.Sobre;
 import jakarta.annotation.PostConstruct;
@@ -16,60 +17,81 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MenuBar extends JMenuBar {
 
     private JMenu arquivo, ajuda, dados, config;
-    private JMenuItem dashboard, sair, atualizarDados, resultados, preferencias, sobre;
-    private JButton home;
-    
+    private JMenuItem dashboardItem, sairItem, atualizarDadosItem, resultadosItem, preferenciasItem, sobreItem;
+    private JButton homeButton;
+
+    @Autowired
+    private ApplicationContext applicationContext;
+
     @Autowired
     private Results results;
+
+    @Autowired
+    private GraficoAtividadeRecentes graficoAtividadeRecentes;
+
+    @Autowired
+    private Sobre sobre;
+
+    @Autowired
+    private HomePanel home;
     
     @PostConstruct
     public void init() {
-        Icon homeIcon = new ImageIcon((FileSystems.getDefault().getPath("")).toAbsolutePath().toString()
+        Icon homeIcon = new ImageIcon((FileSystems.getDefault().getPath("")).toAbsolutePath()
                 + "src/main/java/com/orbitguard/orbitguard/view/assets/icons/home.svg");
-        home = new JButton("", homeIcon);
+        homeButton = new JButton("", homeIcon);
 
-        home.addActionListener((ActionEvent e) -> {
-            showJPanel(new GraficoAtividadeRecentes());
+        homeButton.addActionListener((ActionEvent e) -> {
+            if (home == null) {
+                home = applicationContext.getBean(HomePanel.class);
+            }
+            JFrame parent = getJFrameFromJMenuBar();
+            parent.getContentPane().removeAll();
+            home.refreshComponents();
+            parent.getContentPane().add(home);
+            parent.getContentPane().repaint();
+            parent.getContentPane().revalidate();
         });
-        home.setBackground(Color.red);
+        homeButton.setBackground(Color.red);
         
         arquivo = new JMenu("Arquivo");
-        dashboard = new JMenuItem("Dashboard");
-        dashboard.addActionListener((ActionEvent $e) -> {
-            showJPanel(new GraficoAtividadeRecentes());
+        dashboardItem = new JMenuItem("Dashboard");
+        dashboardItem.addActionListener((ActionEvent $e) -> {
+            showJPanel(graficoAtividadeRecentes);
         });
-        sair = new JMenuItem("Sair");
-        sair.addActionListener((ActionEvent e) -> getJFrameFromJMenuBar().dispose());
-        arquivo.add(dashboard);
-        arquivo.add(sair);
+        sairItem = new JMenuItem("Sair");
+        sairItem.addActionListener((ActionEvent e) -> getJFrameFromJMenuBar().dispose());
+        arquivo.add(dashboardItem);
+        arquivo.add(sairItem);
         dados = new JMenu("Dados");
-        atualizarDados = new JMenuItem("Atualizar Dados");
-        atualizarDados.addActionListener((e) -> {
+        atualizarDadosItem = new JMenuItem("Atualizar Dados");
+        atualizarDadosItem.addActionListener((e) -> {
             new ObjetoService().apiCallTest();
         });
-        resultados = new JMenuItem("Resultados");
-        resultados.addActionListener((e) -> {
+        resultadosItem = new JMenuItem("Resultados");
+        resultadosItem.addActionListener((e) -> {
             showJPanel(results);
         });
-        dados.add(atualizarDados);
-        dados.add(resultados);
+        dados.add(atualizarDadosItem);
+        dados.add(resultadosItem);
         config = new JMenu("Configurações");
-        preferencias = new JMenuItem("Preferências");
-        config.add(preferencias);
+        preferenciasItem = new JMenuItem("Preferências");
+        config.add(preferenciasItem);
         ajuda = new JMenu("Ajuda");
-        sobre = new JMenuItem("Sobre");
-        sobre.addActionListener((ActionEvent $e) -> {
-            showJPanel(new Sobre());
+        sobreItem = new JMenuItem("Sobre");
+        sobreItem.addActionListener((ActionEvent e) -> {
+            showJPanel(sobre);
         });
-        ajuda.add(sobre);
+        ajuda.add(sobreItem);
         
-        this.add(home);
+        this.add(homeButton);
         this.add(arquivo);
         this.add(dados);
         this.add(config);

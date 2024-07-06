@@ -15,10 +15,10 @@ public class Objeto {
     private String nome;
     private double distancia, velocidade, tamanho;
     private boolean potencialRisco;
-    private Date dataProx;
+    private Date dataAprox;
 
-    public Date getDataProx() {
-        return dataProx;
+    public Date getDataAprox() {
+        return dataAprox;
     }
 
     public boolean isPotencialRisco() {
@@ -77,5 +77,10 @@ public class Objeto {
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getNome());
+    }
+
+    @Override
+    public String toString() {
+        return nome;
     }
 }

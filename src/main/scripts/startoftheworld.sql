@@ -1,6 +1,7 @@
 CREATE DATABASE orbitguard;
+USE orbitguard;
 
--- EXAMPLE TABLE
+-- OBJETO TABLE
 CREATE TABLE objeto (
     id int auto_increment,
     nome varchar(255),

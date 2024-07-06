@@ -8,9 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ObjetoRepository extends JpaRepository<Objeto, Long> {
-    @Query("select o from Objeto o where distancia > :distancia order by o.data_aprox limit :limit")
-    List<Objeto> findByDistanciaGreaterThanLimit(@Param("distancia") double distancia, @Param("limit") int limit);
-    
-    @Query("select o from Objeto o where distancia > :distancia order by o.distancia")
+    @Query("select o from Objeto o where o.distancia > :distancia order by o.distancia")
     List<Objeto> findByDistanciaGreaterThan(@Param("distancia") double distancia);
 }

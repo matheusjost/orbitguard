@@ -9,6 +9,7 @@ public class EnvConfig {
 
     private EnvConfig() {
         dotenv = Dotenv.load();
+        // TODO: transferir API_KEY para o banco de dados
         apiKey = dotenv.get("API_KEY");
     }
 

@@ -15,6 +15,8 @@ import java.util.Map;
 public class ObjetoService {
     @Autowired
     private ObjetoRepository repository;
+
+    // tera padrao de sync com a API da NASA. so realizara chamadas a API qdo solicitado
     private final String NASA_NEO_API_BASE_URL = "https://api.nasa.gov/neo/rest/v1/feed";
 
     public Objeto save(Objeto obj) {
@@ -23,10 +25,6 @@ public class ObjetoService {
     
     public List<Objeto> findAll() {
         return repository.findAll();
-    }
-    
-    public List<Objeto> findByDistanciaGreaterThanLimit(double distancia, int limit) {
-        return repository.findByDistanciaGreaterThanLimit(distancia, limit);
     }
     
     public List<Objeto> findByDistanciaGreaterThan(double distancia) {
@@ -38,9 +36,9 @@ public class ObjetoService {
         String url;
         EnvConfig config = getEnvConfig();
 
-        params = HttpUtils.createParams("start_date", "2015-09-07");
-        params = HttpUtils.createParams("end_date", "2015-09-08");
-        params = HttpUtils.createParams("api_key", config.getApiKey());
+        params = HttpUtils.createParams("start_date", "2015-09-07", null);
+        params = HttpUtils.createParams("end_date", "2015-09-08", params);
+        params = HttpUtils.createParams("api_key", config.getApiKey(), params);
         url = HttpUtils.setUrlParams(NASA_NEO_API_BASE_URL, params);
 
         // TODO: tratar retorno, transformar em JSONObject e verificar infos

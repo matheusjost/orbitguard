@@ -2,6 +2,9 @@ package com.orbitguard.orbitguard.controller;
 
 import com.orbitguard.orbitguard.model.objeto.Objeto;
 import com.orbitguard.orbitguard.model.objeto.ObjetoService;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,10 +21,6 @@ public class OrbitGuardController {
 
     public List<Objeto> getObjetos() {
         return service.findAll();
-    }
-    
-    public List<Objeto> getObjetosDistanciaMaiorLimit(double distancia, int limit) {
-        return service.findByDistanciaGreaterThanLimit(distancia, limit);
     }
     
     public List<Objeto> getObjetosDistanciaMaior(double distancia) {

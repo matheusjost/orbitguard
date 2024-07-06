@@ -17,18 +17,12 @@ import javax.swing.*;
 
 @Component
 public class Home extends JFrame {
-
-    private JPanel pnlListaCount, pnlCentro, pnlMain;
-    private JLabel lblTituloLista, lblCountObjProx;
-
-    @Autowired
-    private OrbitGuardController controller;
     
+    @Autowired
+    private HomePanel homePanel;
+
     @Autowired
     private MenuBar menu;
-    
-    @Autowired
-    private Results results;
 
     @PostConstruct
     public void init() {
@@ -39,36 +33,11 @@ public class Home extends JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         Container geral = this.getContentPane();
-        BorderLayout layout = new BorderLayout();
-        pnlMain = new JPanel();
-        pnlMain.setLayout(layout);
-        MenuBar();
-        ListaObjetosProx();
-
-        pnlCentro = new JPanel(new GridLayout(1, 3));
-        pnlCentro.add(new GraficoAtividadeRecentes());
-        pnlCentro.add(pnlListaCount);
-
-        pnlMain.add(pnlCentro, BorderLayout.CENTER);
-        pnlMain.add(new Rodape(), BorderLayout.PAGE_END);
-        geral.add(pnlMain);
+        setMenuBar();
+        geral.add(homePanel);
     }
 
-    private void ListaObjetosProx() {
-        lblTituloLista = new JLabel("Lista Objetos Próximos");
-        lblTituloLista.setFont(new Font("Serif", Font.PLAIN, 22));
-        lblTituloLista.setSize(20, 20);
-        lblTituloLista.setAlignmentX(CENTER_ALIGNMENT);
-        pnlListaCount = new JPanel(new BorderLayout());
-
-        lblCountObjProx = new JLabel("Numero de Objetos Próximos da Terra: " + 10000);
-        lblCountObjProx.setFont(new Font("Serif", Font.PLAIN, 24));
-        pnlListaCount.add(lblTituloLista, BorderLayout.PAGE_START);
-        pnlListaCount.add(results, BorderLayout.CENTER);
-        pnlListaCount.add(lblCountObjProx, BorderLayout.PAGE_END);
-    }
-
-    private void MenuBar() {
+    private void setMenuBar() {
         setJMenuBar(menu);
     }
 }

@@ -4,6 +4,10 @@
  */
 package com.orbitguard.orbitguard.view.home.components;
 
+import jakarta.annotation.PostConstruct;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -15,6 +19,7 @@ import javax.swing.border.EmptyBorder;
  *
  * @author Gustavo
  */
+@Component
 public class Rodape extends JPanel {
 
     private JLabel lblHora, lblData;
@@ -22,7 +27,8 @@ public class Rodape extends JPanel {
     private Calendar horarioAtual;
     private DecimalFormat formato;
 
-    public Rodape() {
+    @PostConstruct
+    private void init() {
         horarioAtual = Calendar.getInstance();
         setLayout(new GridLayout(1, 2));
         setBorder(new EmptyBorder(10, 180, 10, 10));

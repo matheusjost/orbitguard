@@ -7,6 +7,8 @@ import java.awt.Font;
 
 import javax.swing.JPanel;
 
+import com.orbitguard.orbitguard.controller.OrbitGuardController;
+import jakarta.annotation.PostConstruct;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -14,10 +16,17 @@ import org.jfree.chart.StandardChartTheme;
 import org.jfree.chart.renderer.category.StandardBarPainter;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class GraficoAtividadeRecentes extends JPanel {
 
-    public GraficoAtividadeRecentes() {
+    @Autowired
+    private OrbitGuardController controller;
+
+    @PostConstruct
+    public void init() {
         this.setLayout(new BorderLayout(10, 10));
         this.setBackground(Color.GRAY);
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();

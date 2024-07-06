@@ -22,11 +22,10 @@ public class Results extends javax.swing.JPanel {
     @PostConstruct
     private void init() {
         initComponents();
-        
-        AtualizaTable();
+        atualizaTable();
     }
     
-    private void AtualizaTable() {
+    private void atualizaTable() {
         Double distancia = 0.0;
         if (!edDistanciaMaior.getText().isEmpty()) {
             distancia = Double.valueOf(edDistanciaMaior.getText());
@@ -42,13 +41,12 @@ public class Results extends javax.swing.JPanel {
             obj[2] = o.getVelocidade();
             obj[3] = o.getTamanho();
             obj[4] = o.isPotencialRisco();
-            obj[5] = new SimpleDateFormat("dd/MM/yyyy").format(o.getDataProx());
+            obj[5] = new SimpleDateFormat("dd/MM/yyyy").format(o.getDataAprox());
             mdl.addRow(obj);
         }
     }
     
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -129,18 +127,16 @@ public class Results extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 677, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
-    private void edDistanciaMaiorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edDistanciaMaiorKeyReleased
-        AtualizaTable();
-    }//GEN-LAST:event_edDistanciaMaiorKeyReleased
+    private void edDistanciaMaiorKeyReleased(java.awt.event.KeyEvent evt) {
+        atualizaTable();
+    }
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField edDistanciaMaior;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblDistanciaMaior;
     private javax.swing.JTable tblObjetos;
-    // End of variables declaration//GEN-END:variables
 }
