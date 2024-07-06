@@ -3,8 +3,13 @@ package com.orbitguard.orbitguard.view.home.components;
 import com.orbitguard.orbitguard.model.objeto.ObjetoService;
 import com.orbitguard.orbitguard.view.results.Results;
 import com.orbitguard.orbitguard.view.sobre.Sobre;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
+import java.nio.file.FileSystems;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -14,8 +19,17 @@ public class MenuBar extends JMenuBar {
 
     private JMenu arquivo, ajuda, dados, config;
     private JMenuItem dashboard, sair, atualizarDados, resultados, preferencias, sobre;
+    private JButton home;
 
     public MenuBar() {
+        Icon homeIcon = new ImageIcon((FileSystems.getDefault().getPath("")).toAbsolutePath().toString()
+                + "src/main/java/com/orbitguard/orbitguard/view/assets/icons/home.svg");
+        home = new JButton("", homeIcon);
+
+        home.addActionListener((ActionEvent e) -> {
+            showJPanel(new GraficoAtividadeRecentes());
+        });
+        home.setBackground(Color.red);
         
         arquivo = new JMenu("Arquivo");
         dashboard = new JMenuItem("Dashboard");
@@ -47,6 +61,7 @@ public class MenuBar extends JMenuBar {
         });
         ajuda.add(sobre);
         
+        this.add(home);
         this.add(arquivo);
         this.add(dados);
         this.add(config);
@@ -64,8 +79,8 @@ public class MenuBar extends JMenuBar {
     public JFrame getJFrameFromJMenuBar() {
         Container parent = this.getParent();
         while (parent != null) {
-            if (parent instanceof JFrame) {
-                return (JFrame) parent;
+            if (parent instanceof JFrame jFrame) {
+                return jFrame;
             }
             parent = parent.getParent();
         }
