@@ -13,6 +13,15 @@ public class Objeto {
     private int id;
     private String nome;
     private double distancia, velocidade, tamanho;
+    private boolean potencialRisco;
+
+    public boolean isPotencialRisco() {
+        return potencialRisco;
+    }
+
+    public void setPotencialRisco(boolean potencialRisco) {
+        this.potencialRisco = potencialRisco;
+    }
 
     public void setId(int id) {
         this.id = id;

@@ -4,6 +4,7 @@ import com.orbitguard.orbitguard.EnvConfig;
 import com.orbitguard.orbitguard.model.http.HttpRequests;
 import com.orbitguard.orbitguard.model.http.HttpUtils;
 import jakarta.transaction.Transactional;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,10 @@ public class ObjetoService {
 
     public Objeto save(Objeto obj) {
         return repository.save(obj);
+    }
+    
+    public List<Objeto> findAll() {
+        return repository.findAll();
     }
 
     public String apiCallTest() {

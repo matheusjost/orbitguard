@@ -1,15 +1,22 @@
 package com.orbitguard.orbitguard.view.results;
 
+import com.orbitguard.orbitguard.controller.OrbitGuardController;
 import com.orbitguard.orbitguard.model.objeto.Objeto;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author michel
  */
+@Component
 public class Results extends javax.swing.JPanel {
-
+    
+    @Autowired
+    private OrbitGuardController controller;
+    
     public Results() {
         initComponents();
         
@@ -17,17 +24,19 @@ public class Results extends javax.swing.JPanel {
     }
     
     private void AtualizaTable() {
-        /*List<Produto> lstObjetos = modelProdutos.getListaProdutos();
+        List<Objeto> lstObjetos = controller.getObjetos();
         DefaultTableModel mdl = (DefaultTableModel) tblObjetos.getModel();
         mdl.setRowCount(0);
         for (int i = 0; i < lstObjetos.size(); i++) {
             Object[] obj = new Object[3];
-            Produto p = lstObjetos.get(i);
-            obj[0] = p.getId();
-            obj[1] = p.getNome();
-            obj[2] = p.getPreco();
+            Objeto o = lstObjetos.get(i);
+            obj[0] = o.getNome();
+            obj[1] = o.getDistancia();
+            obj[2] = o.getVelocidade();
+            obj[3] = o.getTamanho();
+            obj[4] = o.isPotencialRisco();
             mdl.addRow(obj);
-        }*/
+        }
     }
     
     @SuppressWarnings("unchecked")
@@ -56,7 +65,7 @@ public class Results extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Objeto", "Distância", "Velocidade", "Tamanho", "Risco"
+                "Objeto", "Distância (km)", "Velocidade (km/h)", "Tamanho (km)", "Risco"
             }
         ) {
             Class[] types = new Class [] {

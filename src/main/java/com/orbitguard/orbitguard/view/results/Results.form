@@ -63,9 +63,9 @@
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="5" rowCount="1">
                 <Column editable="false" title="Objeto" type="java.lang.String"/>
-                <Column editable="false" title="Dist&#xe2;ncia" type="java.lang.Double"/>
-                <Column editable="false" title="Velocidade" type="java.lang.Double"/>
-                <Column editable="false" title="Tamanho" type="java.lang.Double"/>
+                <Column editable="false" title="Dist&#xe2;ncia (km)" type="java.lang.Double"/>
+                <Column editable="false" title="Velocidade (km/h)" type="java.lang.Double"/>
+                <Column editable="false" title="Tamanho (km)" type="java.lang.Double"/>
                 <Column editable="false" title="Risco" type="java.lang.Boolean"/>
               </Table>
             </Property>
