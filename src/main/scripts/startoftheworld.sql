@@ -8,5 +8,6 @@ CREATE TABLE objeto (
     velocidade double,
     tamanho double,
     potencial_risco boolean,
+    data_aprox date,
     primary key (id)
 );

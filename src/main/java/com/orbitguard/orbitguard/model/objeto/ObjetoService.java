@@ -24,6 +24,14 @@ public class ObjetoService {
     public List<Objeto> findAll() {
         return repository.findAll();
     }
+    
+    public List<Objeto> findByDistanciaGreaterThanLimit(double distancia, int limit) {
+        return repository.findByDistanciaGreaterThanLimit(distancia, limit);
+    }
+    
+    public List<Objeto> findByDistanciaGreaterThan(double distancia) {
+        return repository.findByDistanciaGreaterThan(distancia);
+    }
 
     public String apiCallTest() {
         Map<String, String> params;

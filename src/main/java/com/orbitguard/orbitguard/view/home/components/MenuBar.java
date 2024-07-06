@@ -3,6 +3,7 @@ package com.orbitguard.orbitguard.view.home.components;
 import com.orbitguard.orbitguard.model.objeto.ObjetoService;
 import com.orbitguard.orbitguard.view.results.Results;
 import com.orbitguard.orbitguard.view.sobre.Sobre;
+import jakarta.annotation.PostConstruct;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
@@ -14,14 +15,21 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MenuBar extends JMenuBar {
 
     private JMenu arquivo, ajuda, dados, config;
     private JMenuItem dashboard, sair, atualizarDados, resultados, preferencias, sobre;
     private JButton home;
-
-    public MenuBar() {
+    
+    @Autowired
+    private Results results;
+    
+    @PostConstruct
+    public void init() {
         Icon homeIcon = new ImageIcon((FileSystems.getDefault().getPath("")).toAbsolutePath().toString()
                 + "src/main/java/com/orbitguard/orbitguard/view/assets/icons/home.svg");
         home = new JButton("", homeIcon);
@@ -47,7 +55,7 @@ public class MenuBar extends JMenuBar {
         });
         resultados = new JMenuItem("Resultados");
         resultados.addActionListener((e) -> {
-            showJPanel(new Results());
+            showJPanel(results);
         });
         dados.add(atualizarDados);
         dados.add(resultados);

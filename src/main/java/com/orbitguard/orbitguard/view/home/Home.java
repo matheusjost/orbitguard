@@ -23,6 +23,12 @@ public class Home extends JFrame {
 
     @Autowired
     private OrbitGuardController controller;
+    
+    @Autowired
+    private MenuBar menu;
+    
+    @Autowired
+    private Results results;
 
     @PostConstruct
     public void init() {
@@ -58,11 +64,11 @@ public class Home extends JFrame {
         lblCountObjProx = new JLabel("Numero de Objetos Próximos da Terra: " + 10000);
         lblCountObjProx.setFont(new Font("Serif", Font.PLAIN, 24));
         pnlListaCount.add(lblTituloLista, BorderLayout.PAGE_START);
-        pnlListaCount.add(new Results(), BorderLayout.CENTER);
+        pnlListaCount.add(results, BorderLayout.CENTER);
         pnlListaCount.add(lblCountObjProx, BorderLayout.PAGE_END);
     }
 
     private void MenuBar() {
-        setJMenuBar(new MenuBar());
+        setJMenuBar(menu);
     }
 }

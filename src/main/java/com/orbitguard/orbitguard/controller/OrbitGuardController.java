@@ -19,4 +19,12 @@ public class OrbitGuardController {
     public List<Objeto> getObjetos() {
         return service.findAll();
     }
+    
+    public List<Objeto> getObjetosDistanciaMaiorLimit(double distancia, int limit) {
+        return service.findByDistanciaGreaterThanLimit(distancia, limit);
+    }
+    
+    public List<Objeto> getObjetosDistanciaMaior(double distancia) {
+        return service.findByDistanciaGreaterThan(distancia);
+    }
 }

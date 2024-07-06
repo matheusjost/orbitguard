@@ -3,6 +3,7 @@ package com.orbitguard.orbitguard.model.objeto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import java.util.Date;
 
 import java.util.Objects;
 
@@ -14,6 +15,11 @@ public class Objeto {
     private String nome;
     private double distancia, velocidade, tamanho;
     private boolean potencialRisco;
+    private Date dataProx;
+
+    public Date getDataProx() {
+        return dataProx;
+    }
 
     public boolean isPotencialRisco() {
         return potencialRisco;
