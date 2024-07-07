@@ -5,7 +5,9 @@ import com.orbitguard.orbitguard.model.objeto.ObjetoService;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,5 +27,9 @@ public class OrbitGuardController {
     
     public List<Objeto> getObjetosDistanciaMaior(double distancia) {
         return service.findByDistanciaGreaterThan(distancia);
+    }
+    
+    public List<Object[]> getCountByDate() {
+        return service.countByDate();
     }
 }

@@ -4,6 +4,7 @@ import com.orbitguard.orbitguard.EnvConfig;
 import com.orbitguard.orbitguard.model.http.HttpRequests;
 import com.orbitguard.orbitguard.model.http.HttpUtils;
 import jakarta.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,10 @@ public class ObjetoService {
     
     public List<Objeto> findByDistanciaGreaterThan(double distancia) {
         return repository.findByDistanciaGreaterThan(distancia);
+    }
+    
+    public List<Object[]> countByDate() {
+        return repository.countByDate();
     }
 
     public String apiCallTest() {

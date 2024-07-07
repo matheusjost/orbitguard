@@ -26,9 +26,12 @@ public class Results extends javax.swing.JPanel {
     }
     
     private void atualizaTable() {
-        Double distancia = 0.0;
-        if (!edDistanciaMaior.getText().isEmpty()) {
+        
+        Double distancia;
+        try {
             distancia = Double.valueOf(edDistanciaMaior.getText());
+        } catch (NumberFormatException e) {
+            distancia = 0.0;
         }
         
         List<Objeto> lstObjetos = controller.getObjetosDistanciaMaior(distancia);
@@ -41,7 +44,9 @@ public class Results extends javax.swing.JPanel {
             obj[2] = o.getVelocidade();
             obj[3] = o.getTamanho();
             obj[4] = o.isPotencialRisco();
-            obj[5] = new SimpleDateFormat("dd/MM/yyyy").format(o.getDataAprox());
+            if (o.getDataAprox() != null) {
+                obj[5] = new SimpleDateFormat("dd/MM/yyyy").format(o.getDataAprox());
+            }
             mdl.addRow(obj);
         }
     }

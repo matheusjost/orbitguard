@@ -30,6 +30,7 @@ public class GraficoAtividadeRecentes extends JPanel {
         this.setLayout(new BorderLayout(10, 10));
         this.setBackground(Color.GRAY);
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        controller.getCountByDate();
         // PARTE ONDE SETA VALORES DO GRAFICO , USAR MODEL PARA POPULAR FUTURAMENTE
         dataset.addValue(1, "meteoro", "18-06");
         dataset.addValue(3, "meteoro", "19-06");

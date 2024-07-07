@@ -1,5 +1,6 @@
 package com.orbitguard.orbitguard.model.objeto;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -14,7 +15,9 @@ public class Objeto {
     private int id;
     private String nome;
     private double distancia, velocidade, tamanho;
+    @Column(name = "potencial_risco")
     private boolean potencialRisco;
+    @Column(name = "data_aprox")
     private Date dataAprox;
 
     public Date getDataAprox() {
