@@ -1,5 +1,6 @@
 package com.orbitguard.orbitguard.view.home.components;
 
+import com.orbitguard.orbitguard.controller.OrbitGuardController;
 import com.orbitguard.orbitguard.model.objeto.ObjetoService;
 import com.orbitguard.orbitguard.view.home.HomePanel;
 import com.orbitguard.orbitguard.view.results.Results;
@@ -9,6 +10,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.nio.file.FileSystems;
+import java.util.Date;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -42,6 +44,9 @@ public class MenuBar extends JMenuBar {
     @Autowired
     private HomePanel home;
     
+    @Autowired
+    private OrbitGuardController controller;
+    
     @PostConstruct
     public void init() {
         Icon homeIcon = new ImageIcon((FileSystems.getDefault().getPath("")).toAbsolutePath()
@@ -73,6 +78,7 @@ public class MenuBar extends JMenuBar {
         dados = new JMenu("Dados");
         atualizarDadosItem = new JMenuItem("Atualizar Dados");
         atualizarDadosItem.addActionListener((e) -> {
+            controller.updateLocalObjeto(new Date(), new Date());
         });
         resultadosItem = new JMenuItem("Resultados");
         resultadosItem.addActionListener((e) -> {

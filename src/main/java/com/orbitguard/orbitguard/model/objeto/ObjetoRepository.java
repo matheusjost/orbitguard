@@ -12,7 +12,7 @@ public interface ObjetoRepository extends JpaRepository<Objeto, Long> {
     @Query("select o from Objeto o where o.distancia > :distancia order by o.distancia")
     List<Objeto> findByDistanciaGreaterThan(@Param("distancia") double distancia);
     
-    @Query("select o.dataAprox, count(*) as count from Objeto o group by o.dataAprox")
+    @Query("select date_format(o.dataAprox,'%d/%m/%Y'), count(*) as count from Objeto o group by o.dataAprox")
     List<Object[]> countByDate();
 
     Objeto findByNomeAndDataAprox (String nome, Date dataAprox);
