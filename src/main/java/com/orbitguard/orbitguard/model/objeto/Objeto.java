@@ -1,9 +1,7 @@
 package com.orbitguard.orbitguard.model.objeto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 import java.util.Date;
 
 import java.util.Objects;
@@ -12,11 +10,27 @@ import java.util.Objects;
 @Table(name = "objeto")
 public class Objeto {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+    @Column(name = "nome")
     private String nome;
-    private double distancia, velocidade, tamanho;
+
+    @Column(name = "distancia")
+    private double distancia;
+
+    @Column(name = "velocidade")
+    private double velocidade;
+
+    @Column(name = "tamanho_max_estimado")
+    private double tamanhoMaxEstimado;
+
+    @Column(name = "tamanho_min_estimado")
+    private double tamanhoMinEstimado;
+
     @Column(name = "potencial_risco")
     private boolean potencialRisco;
+
     @Column(name = "data_aprox")
     private Date dataAprox;
 
@@ -56,12 +70,24 @@ public class Objeto {
         this.velocidade = velocidade;
     }
 
-    public double getTamanho() {
-        return tamanho;
+    public double getTamanhoMinEstimado() {
+        return tamanhoMinEstimado;
     }
 
-    public void setTamanho(double tamanho) {
-        this.tamanho = tamanho;
+    public void setTamanhoMinEstimado(double tamanhoMinEstimado) {
+        this.tamanhoMinEstimado = tamanhoMinEstimado;
+    }
+
+    public double getTamanhoMaxEstimado() {
+        return tamanhoMaxEstimado;
+    }
+
+    public void setTamanhoMaxEstimado(double tamanhoMaxEstimado) {
+        this.tamanhoMaxEstimado = tamanhoMaxEstimado;
+    }
+
+    public void setDataAprox(Date dataAprox) {
+        this.dataAprox = dataAprox;
     }
 
     public String getNome() {

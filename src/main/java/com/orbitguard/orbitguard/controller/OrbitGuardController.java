@@ -21,6 +21,10 @@ public class OrbitGuardController {
         return service.save(obj);
     }
 
+    public void updateLocalObjeto(Date start, Date end) {
+        service.updateLocalObjeto(start, end);
+    }
+
     public List<Objeto> getObjetos() {
         return service.findAll();
     }

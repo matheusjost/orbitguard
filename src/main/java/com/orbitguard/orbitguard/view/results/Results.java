@@ -4,6 +4,7 @@ import com.orbitguard.orbitguard.controller.OrbitGuardController;
 import com.orbitguard.orbitguard.model.objeto.Objeto;
 import jakarta.annotation.PostConstruct;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class Results extends javax.swing.JPanel {
             obj[0] = o.getNome();
             obj[1] = o.getDistancia();
             obj[2] = o.getVelocidade();
-            obj[3] = o.getTamanho();
+            obj[3] = o.getTamanhoMinEstimado();
             obj[4] = o.isPotencialRisco();
             if (o.getDataAprox() != null) {
                 obj[5] = new SimpleDateFormat("dd/MM/yyyy").format(o.getDataAprox());

@@ -4,10 +4,12 @@ import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.List;
 
 import javax.swing.JPanel;
 
 import com.orbitguard.orbitguard.controller.OrbitGuardController;
+import com.orbitguard.orbitguard.model.objeto.Objeto;
 import jakarta.annotation.PostConstruct;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -30,7 +32,7 @@ public class GraficoAtividadeRecentes extends JPanel {
         this.setLayout(new BorderLayout(10, 10));
         this.setBackground(Color.GRAY);
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        controller.getCountByDate();
+        List<Object[]> o = controller.getCountByDate();
         // PARTE ONDE SETA VALORES DO GRAFICO , USAR MODEL PARA POPULAR FUTURAMENTE
         dataset.addValue(1, "meteoro", "18-06");
         dataset.addValue(3, "meteoro", "19-06");

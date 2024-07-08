@@ -7,7 +7,8 @@ CREATE TABLE objeto (
     nome varchar(255),
     distancia double,
     velocidade double,
-    tamanho double,
+    tamanho_min_estimado double,
+    tamanho_max_estimado double,
     potencial_risco boolean,
     data_aprox date,
     primary key (id)

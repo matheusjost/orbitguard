@@ -1,4 +1,4 @@
-package com.orbitguard.orbitguard.model.http;
+package com.orbitguard.orbitguard.model.utils;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
