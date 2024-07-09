@@ -47,4 +47,8 @@ public class OrbitGuardController {
     public Config saveConfig(Config config) {
         return configService.save(config);
     }
+    
+    public Long getCount() {
+        return service.count();
+    }
 }

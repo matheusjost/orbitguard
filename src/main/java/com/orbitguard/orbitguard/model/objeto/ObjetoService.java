@@ -45,6 +45,10 @@ public class ObjetoService {
     public List<Object[]> countByDate() {
         return repository.countByDate();
     }
+    
+    public Long count() {
+        return repository.count();
+    }
 
     private String callNasaApi(Date start, Date end) {
         Map<String, String> params;

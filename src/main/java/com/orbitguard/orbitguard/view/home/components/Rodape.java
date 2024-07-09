@@ -34,11 +34,11 @@ public class Rodape extends JPanel {
         setBorder(new EmptyBorder(10, 180, 10, 10));
         lblData = new JLabel();
         setDataAtual(horarioAtual);
-        lblData.setFont(new Font("Times New Roman", Font.BOLD, 32));
+        lblData.setFont(new Font("Tahoma", Font.BOLD, 32));
         lblHora = new JLabel();
         Timer time = new Timer(1000, ativarTimer);
         time.start();
-        lblHora.setFont(new Font("Times New Roman", Font.BOLD, 32));
+        lblHora.setFont(new Font("Tahoma", Font.BOLD, 32));
         add(lblHora);
         add(lblData);
     }
