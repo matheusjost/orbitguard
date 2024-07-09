@@ -30,13 +30,11 @@ public class GraficoAtividadeRecentes extends JPanel {
     public void init() {
         this.setLayout(new BorderLayout(10, 10));
         this.setBackground(Color.GRAY);
-        
         criaGrafico();
     }
-    
+
     public void criaGrafico() {
         this.removeAll();
-        
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         List<Object[]> objs = controller.getCountByDate();
         for (Object[] o : objs) {
@@ -60,7 +58,7 @@ public class GraficoAtividadeRecentes extends JPanel {
         theme.setGridBandPaint(Color.red);
         theme.setAxisOffset(new RectangleInsets(0, 0, 0, 0));
         theme.setBarPainter(new StandardBarPainter());
-        theme.setRegularFont(new Font("Serif", Font.PLAIN, 22));
+        theme.setRegularFont(new Font("Tahoma", Font.PLAIN, 16));
         theme.setAxisLabelPaint(Color.WHITE);
         theme.apply(chart);
         chart.getCategoryPlot().setOutlineVisible(false);

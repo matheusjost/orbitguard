@@ -3,6 +3,7 @@ package com.orbitguard.orbitguard.view.home.components;
 import com.orbitguard.orbitguard.controller.OrbitGuardController;
 import com.orbitguard.orbitguard.model.utils.DateUtils;
 import com.orbitguard.orbitguard.view.home.HomePanel;
+import com.orbitguard.orbitguard.view.preferencias.Preferencias;
 import com.orbitguard.orbitguard.view.results.Results;
 import com.orbitguard.orbitguard.view.sobre.Sobre;
 import jakarta.annotation.PostConstruct;
@@ -19,6 +20,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
@@ -44,10 +46,13 @@ public class MenuBar extends JMenuBar {
 
     @Autowired
     private HomePanel home;
-    
+
+    @Autowired
+    private Preferencias preferencias;
+
     @Autowired
     private OrbitGuardController controller;
-    
+
     @PostConstruct
     public void init() {
         Icon homeIcon = new ImageIcon((FileSystems.getDefault().getPath("")).toAbsolutePath()
@@ -66,7 +71,7 @@ public class MenuBar extends JMenuBar {
             parent.getContentPane().revalidate();
         });
         homeButton.setBackground(Color.red);
-        
+
         arquivo = new JMenu("Arquivo");
         dashboardItem = new JMenuItem("Dashboard");
         dashboardItem.addActionListener((ActionEvent $e) -> {
@@ -79,9 +84,13 @@ public class MenuBar extends JMenuBar {
         dados = new JMenu("Dados");
         atualizarDadosItem = new JMenuItem("Atualizar Dados");
         atualizarDadosItem.addActionListener((e) -> {
-            controller.updateLocalObjeto(new Date(), DateUtils.plusDays(new Date(), 7));
+        
+                controller.updateLocalObjeto(new Date(), DateUtils.plusDays(new Date(), 7));
             results.atualizaTable();
             graficoAtividadeRecentes.criaGrafico();
+            JOptionPane.showMessageDialog(null, "Sucesso ao salvar API_KEY", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+          
+            
         });
         resultadosItem = new JMenuItem("Resultados");
         resultadosItem.addActionListener((e) -> {
@@ -91,6 +100,9 @@ public class MenuBar extends JMenuBar {
         dados.add(resultadosItem);
         config = new JMenu("Configurações");
         preferenciasItem = new JMenuItem("Preferências");
+        preferenciasItem.addActionListener((ActionEvent e) -> {
+            showJPanel(preferencias);
+        });
         config.add(preferenciasItem);
         ajuda = new JMenu("Ajuda");
         sobreItem = new JMenuItem("Sobre");
@@ -98,14 +110,14 @@ public class MenuBar extends JMenuBar {
             showJPanel(sobre);
         });
         ajuda.add(sobreItem);
-        
+
         this.add(homeButton);
         this.add(arquivo);
         this.add(dados);
         this.add(config);
         this.add(ajuda);
     }
-    
+
     private void showJPanel(java.awt.Component com) {
         JFrame parent = getJFrameFromJMenuBar();
         parent.getContentPane().removeAll();
@@ -113,7 +125,7 @@ public class MenuBar extends JMenuBar {
         parent.getContentPane().repaint();
         parent.getContentPane().revalidate();
     }
-    
+
     public JFrame getJFrameFromJMenuBar() {
         Container parent = this.getParent();
         while (parent != null) {
