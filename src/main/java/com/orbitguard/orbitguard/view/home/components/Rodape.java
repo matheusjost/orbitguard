@@ -45,7 +45,7 @@ public class Rodape extends JPanel {
 
     private void setDataAtual(Calendar horarioAtual) {
         dia = horarioAtual.get(Calendar.DATE);
-        mes = horarioAtual.get(Calendar.MONTH);
+        mes = horarioAtual.get(Calendar.MONTH) + 1;
         ano = horarioAtual.get(Calendar.YEAR);
         lblData.setText("Data: " + formatarDecimal(dia) + "/" + formatarDecimal(mes) + "/"
                 + formatarDecimal(ano));
