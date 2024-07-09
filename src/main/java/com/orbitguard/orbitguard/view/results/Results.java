@@ -3,8 +3,8 @@ package com.orbitguard.orbitguard.view.results;
 import com.orbitguard.orbitguard.controller.OrbitGuardController;
 import com.orbitguard.orbitguard.model.objeto.Objeto;
 import jakarta.annotation.PostConstruct;
+import java.awt.BorderLayout;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -119,20 +119,10 @@ public class Results extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblObjetos);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        BorderLayout layout = new BorderLayout();
         this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 677, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        this.add(jScrollPane1, BorderLayout.CENTER);
+        this.add(jPanel1, BorderLayout.PAGE_START);
     }
 
     private void edDistanciaMaiorKeyReleased(java.awt.event.KeyEvent evt) {
