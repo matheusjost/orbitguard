@@ -22,7 +22,7 @@ public class Sobre extends javax.swing.JPanel {
                 jScrollPane1 = new javax.swing.JScrollPane();
                 jTextArea1 = new javax.swing.JTextArea();
                 jLabel1 = new javax.swing.JLabel();
-
+                jTextArea1.setEditable(false);
                 jTextArea1.setColumns(20);
                 jTextArea1.setRows(5);
                 jTextArea1.setLineWrap(true);
