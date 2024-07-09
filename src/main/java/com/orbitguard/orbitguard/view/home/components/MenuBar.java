@@ -88,7 +88,7 @@ public class MenuBar extends JMenuBar {
                 controller.updateLocalObjeto(new Date(), DateUtils.plusDays(new Date(), 7));
             results.atualizaTable();
             graficoAtividadeRecentes.criaGrafico();
-            JOptionPane.showMessageDialog(null, "Sucesso ao salvar API_KEY", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Sucesso ao atualizar dados", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
           
             
         });
