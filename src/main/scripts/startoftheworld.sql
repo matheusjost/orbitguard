@@ -13,3 +13,13 @@ CREATE TABLE objeto (
     data_aprox date,
     primary key (id)
 );
+
+-- CONFIG TABLE
+CREATE TABLE config (
+    id int auto_increment,
+    nasa_api_key varchar(255),
+    qtd_dias_sync int,
+    primary key (id)
+);
+
+INSERT INTO config (nasa_api_key, qtd_dias_sync) VALUES ('DEMO_KEY', 7);

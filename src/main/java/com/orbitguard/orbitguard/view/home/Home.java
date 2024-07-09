@@ -1,14 +1,9 @@
 package com.orbitguard.orbitguard.view.home;
 
-import com.orbitguard.orbitguard.controller.OrbitGuardController;
 import com.orbitguard.orbitguard.view.home.components.*;
-import com.orbitguard.orbitguard.view.results.Results;
 
 import jakarta.annotation.PostConstruct;
-import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.Font;
-import java.awt.GridLayout;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

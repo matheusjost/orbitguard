@@ -1,7 +1,7 @@
 package com.orbitguard.orbitguard.view.home.components;
 
 import com.orbitguard.orbitguard.controller.OrbitGuardController;
-import com.orbitguard.orbitguard.model.objeto.ObjetoService;
+import com.orbitguard.orbitguard.model.utils.DateUtils;
 import com.orbitguard.orbitguard.view.home.HomePanel;
 import com.orbitguard.orbitguard.view.results.Results;
 import com.orbitguard.orbitguard.view.sobre.Sobre;
@@ -78,7 +78,8 @@ public class MenuBar extends JMenuBar {
         dados = new JMenu("Dados");
         atualizarDadosItem = new JMenuItem("Atualizar Dados");
         atualizarDadosItem.addActionListener((e) -> {
-            controller.updateLocalObjeto(new Date(), new Date());
+            controller.updateLocalObjeto(new Date(), DateUtils.plusDays(new Date(), 7));
+            results.atualizaTable();
         });
         resultadosItem = new JMenuItem("Resultados");
         resultadosItem.addActionListener((e) -> {

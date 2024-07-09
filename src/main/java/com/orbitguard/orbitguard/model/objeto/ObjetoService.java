@@ -1,16 +1,15 @@
 package com.orbitguard.orbitguard.model.objeto;
 
-import com.orbitguard.orbitguard.EnvConfig;
+import com.orbitguard.orbitguard.model.config.Config;
+import com.orbitguard.orbitguard.model.config.ConfigService;
 import com.orbitguard.orbitguard.model.http.HttpRequests;
+import com.orbitguard.orbitguard.model.utils.DateUtils;
 import com.orbitguard.orbitguard.model.utils.HttpUtils;
 import com.orbitguard.orbitguard.model.utils.JSONObjectUtils;
 import jakarta.transaction.Transactional;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -25,6 +24,9 @@ import java.util.Map;
 public class ObjetoService {
     @Autowired
     private ObjetoRepository repository;
+
+    @Autowired
+    private ConfigService configService;
 
     private final String NASA_NEO_API_BASE_URL = "https://api.nasa.gov/neo/rest/v1/feed";
 
@@ -47,15 +49,14 @@ public class ObjetoService {
     private String callNasaApi(Date start, Date end) {
         Map<String, String> params;
         String url;
-        EnvConfig config = getEnvConfig();
+        Config config = configService.getConfig();
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String startDate = sdf.format(start);
-        String endDate = sdf.format(end);
+        String startDate = DateUtils.format(start, "yyyy-MM-dd");
+        String endDate = DateUtils.format(end, "yyyy-MM-dd");
 
         params = HttpUtils.createParams("start_date", startDate, null);
         params = HttpUtils.createParams("end_date", endDate, params);
-        params = HttpUtils.createParams("api_key", config.getApiKey(), params);
+        params = HttpUtils.createParams("api_key", config.getNasaApiKey(), params);
         url = HttpUtils.setUrlParams(NASA_NEO_API_BASE_URL, params);
 
         return HttpRequests.get(url);
@@ -123,9 +124,5 @@ public class ObjetoService {
                 }
             }
         }
-    }
-
-    private EnvConfig getEnvConfig() {
-        return EnvConfig.getInstance();
     }
 }

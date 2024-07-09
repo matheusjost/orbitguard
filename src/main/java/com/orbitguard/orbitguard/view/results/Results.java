@@ -26,7 +26,7 @@ public class Results extends javax.swing.JPanel {
         atualizaTable();
     }
     
-    private void atualizaTable() {
+    public void atualizaTable() {
         
         Double distancia;
         try {
