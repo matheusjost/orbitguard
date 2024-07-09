@@ -33,19 +33,19 @@ public class ObjetoService {
     public Objeto save(Objeto obj) {
         return repository.save(obj);
     }
-    
+
     public List<Objeto> findAll() {
         return repository.findAll();
     }
-    
+
     public List<Objeto> findByDistanciaGreaterThan(double distancia) {
         return repository.findByDistanciaGreaterThan(distancia);
     }
-    
+
     public List<Object[]> countByDate() {
         return repository.countByDate();
     }
-    
+
     public Long count() {
         return repository.count();
     }
@@ -67,7 +67,8 @@ public class ObjetoService {
     }
 
     private boolean validateObjetoData(String name, String date) {
-        if (name == null || date == null) return false;
+        if (name == null || date == null)
+            return false;
 
         LocalDate dataAprox = LocalDate.parse(date);
         Objeto check = repository.findByNomeAndDataAprox(name, java.sql.Date.valueOf(dataAprox));
@@ -86,7 +87,7 @@ public class ObjetoService {
 
         Objeto o = new Objeto();
         o.setNome(JSONObjectUtils.getStringOrNull(obj, "name"));
-        o.setDistancia(JSONObjectUtils.getDoubleOrNull(missDistance,"kilometers"));
+        o.setDistancia(JSONObjectUtils.getDoubleOrNull(missDistance, "kilometers"));
         o.setVelocidade(JSONObjectUtils.getDoubleOrNull(relativeVelocity, "kilometers_per_hour"));
         o.setTamanhoMinEstimado(JSONObjectUtils.getDoubleOrNull(estimatedDiameterKm, "estimated_diameter_min"));
         o.setTamanhoMaxEstimado(JSONObjectUtils.getDoubleOrNull(estimatedDiameterKm, "estimated_diameter_max"));
@@ -98,18 +99,20 @@ public class ObjetoService {
         return o;
     }
 
-    public void updateLocalObjeto(Date start, Date end) {
+    public void updateLocalObjeto(Date start, Date end) throws Exception {
         String res = callNasaApi(start, end);
         JSONObject jsonRes;
 
         try {
             jsonRes = new JSONObject(res);
         } catch (Exception e) {
-            return;
+            throw new Exception("Erro ao tentar atualizar dados");
         }
 
-        if (!jsonRes.has("element_count") || !jsonRes.has("near_earth_objects")) return;
-        if (jsonRes.getInt("element_count") == 0) return;
+        if (!jsonRes.has("element_count") || !jsonRes.has("near_earth_objects"))
+            return;
+        if (jsonRes.getInt("element_count") == 0)
+            return;
 
         if (jsonRes.has("near_earth_objects") &&
                 jsonRes.has("element_count") &&
@@ -121,7 +124,8 @@ public class ObjetoService {
 
                 for (int i = 0; i < dateObjects.length(); i++) {
                     JSONObject obj = dateObjects.getJSONObject(i);
-                    if (!validateObjetoData(obj.getString("name"), date)) continue;
+                    if (!validateObjetoData(obj.getString("name"), date))
+                        continue;
 
                     Objeto o = setObjetoData(obj, date);
                     repository.save(o);

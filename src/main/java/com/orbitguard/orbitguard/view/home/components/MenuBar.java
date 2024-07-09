@@ -85,11 +85,17 @@ public class MenuBar extends JMenuBar {
         dados = new JMenu("Dados");
         atualizarDadosItem = new JMenuItem("Atualizar Dados");
         atualizarDadosItem.addActionListener((e) -> {
-            controller.updateLocalObjeto(new Date(), DateUtils.plusDays(new Date(), 7));
-            results.atualizaTable();
-            graficoAtividadeRecentes.criaGrafico();
-            JOptionPane.showMessageDialog(null, "Sucesso ao atualizar dados", "Sucesso",
-                    JOptionPane.INFORMATION_MESSAGE);
+            try {
+                controller.updateLocalObjeto(new Date(), DateUtils.plusDays(new Date(), 7));
+                results.atualizaTable();
+                graficoAtividadeRecentes.criaGrafico();
+                JOptionPane.showMessageDialog(null, "Sucesso ao atualizar dados", "Sucesso",
+                        JOptionPane.INFORMATION_MESSAGE);
+
+            } catch (Exception error) {
+                JOptionPane.showMessageDialog(null, "Erro ao tentar atualizar dados", "Sucesso",
+                        JOptionPane.ERROR_MESSAGE);
+            }
 
         });
         resultadosItem = new JMenuItem("Resultados");

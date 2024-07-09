@@ -24,18 +24,18 @@ public class OrbitGuardController {
         return objetoService.save(obj);
     }
 
-    public void updateLocalObjeto(Date start, Date end) {
+    public void updateLocalObjeto(Date start, Date end) throws Exception {
         objetoService.updateLocalObjeto(start, end);
     }
 
     public List<Objeto> getObjetos() {
         return objetoService.findAll();
     }
-    
+
     public List<Objeto> getObjetosDistanciaMaior(double distancia) {
         return objetoService.findByDistanciaGreaterThan(distancia);
     }
-    
+
     public List<Object[]> getCountByDate() {
         return objetoService.countByDate();
     }
@@ -47,7 +47,7 @@ public class OrbitGuardController {
     public Config saveConfig(Config config) {
         return configService.save(config);
     }
-    
+
     public Long getCount() {
         return objetoService.count();
     }
