@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.nio.file.FileSystems;
+import java.util.Calendar;
 import java.util.Date;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -78,7 +79,9 @@ public class MenuBar extends JMenuBar {
         dados = new JMenu("Dados");
         atualizarDadosItem = new JMenuItem("Atualizar Dados");
         atualizarDadosItem.addActionListener((e) -> {
-            controller.updateLocalObjeto(new Date(), new Date());
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.DATE, 30);
+            controller.updateLocalObjeto(new Date(),cal.getTime());
         });
         resultadosItem = new JMenuItem("Resultados");
         resultadosItem.addActionListener((e) -> {

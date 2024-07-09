@@ -36,4 +36,8 @@ public class OrbitGuardController {
     public List<Object[]> getCountByDate() {
         return service.countByDate();
     }
+    
+    public Long getCount() {
+        return service.count();
+    }
 }
