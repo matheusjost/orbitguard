@@ -70,6 +70,8 @@ public class GraficoAtividadeRecentes extends JPanel {
         chart.setTextAntiAlias(true);
         chart.setAntiAlias(true);
         chart.getCategoryPlot().getRenderer().setSeriesPaint(0, Color.RED);
+        chart.getCategoryPlot().getRenderer().setSeriesStroke(0, new BasicStroke(3.0f));
+        chart.getCategoryPlot().setBackgroundPaint(Color.LIGHT_GRAY);
         ChartPanel grafico = new ChartPanel(chart);
         grafico.setBackground(Color.GRAY);
         this.add(grafico, BorderLayout.CENTER);
