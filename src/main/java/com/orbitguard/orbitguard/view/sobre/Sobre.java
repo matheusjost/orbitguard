@@ -5,6 +5,8 @@
 package com.orbitguard.orbitguard.view.sobre;
 
 import jakarta.annotation.PostConstruct;
+import java.awt.BorderLayout;
+import javax.swing.SwingConstants;
 import org.springframework.stereotype.Component;
 
 /**
@@ -23,34 +25,22 @@ public class Sobre extends javax.swing.JPanel {
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jTextArea1.setText("Trabalho de Programação avançada \n");
+        jTextArea1.setLineWrap(true);
+        jTextArea1.setWrapStyleWord(true);
+        jTextArea1.setText("O projeto desenvolvido na disciplina de programação avançada na Universidade de Santa Cruz do Sul utiliza o ambiente integrado NetBeans com Java Swing para criar uma aplicação de monitoramento de meteoros. A escolha do Java Swing como framework para a interface gráfica proporciona não apenas uma experiência intuitiva ao usuário, mas também garante a portabilidade da aplicação em diferentes sistemas operacionais. Isso permite que os usuários visualizem e interajam de forma eficiente com os dados sobre meteoros obtidos através da API da NASA.\n\n" +
+                           "A interface gráfica desenvolvida apresenta um design intuitivo e responsivo, facilitando a navegação e a compreensão das informações. Os dados são atualizados em tempo real, utilizando as funcionalidades da API da NASA, que fornece informações detalhadas sobre meteoros próximos à Terra, incluindo características físicas, trajetórias previstas e datas de avistamento. \n\n" +
+                           "Para garantir a persistência e organização dos dados coletados, o projeto utiliza um banco de dados MySQL robusto. Essa escolha não apenas assegura a integridade dos dados, mas também facilita a consulta e a análise posterior das informações meteorológicas armazenadas. O banco de dados é projetado para lidar eficientemente com grandes volumes de dados, essencial para um sistema de monitoramento que constantemente atualiza e armazena novas informações. Além disso, o projeto incorpora práticas modernas de desenvolvimento de software, como o uso de padrões de projeto (design patterns) em Java, garantindo uma arquitetura modular e extensível. Isso não só facilita a manutenção do código, mas também permite futuras expansões e melhorias na aplicação de monitoramento de meteoros.\n\n" +
+                           "O objetivo principal deste projeto vai além de cumprir requisitos acadêmicos: visa fornecer uma ferramenta educativa e informativa, integrando conceitos avançados de programação com tecnologias modernas. A utilização de padrões de projeto em Java, aliada à interface gráfica intuitiva e à integração com API externa, exemplifica como teoria e prática se convergem na criação de soluções tecnológicas eficientes e inovadoras.");
         jScrollPane1.setViewportView(jTextArea1);
 
-        jLabel1.setFont(new java.awt.Font("Serif", 0, 36));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36));
         jLabel1.setText("OrbitGuard");
+        jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        BorderLayout layout = new BorderLayout();
         this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(539, 539, 539))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        this.add(jScrollPane1,BorderLayout.CENTER);
+        this.add(jLabel1,BorderLayout.PAGE_START);
     }
 
 
