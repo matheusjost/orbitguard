@@ -49,6 +49,6 @@ public class OrbitGuardController {
     }
     
     public Long getCount() {
-        return service.count();
+        return objetoService.count();
     }
 }

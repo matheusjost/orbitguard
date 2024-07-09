@@ -81,6 +81,7 @@ public class MenuBar extends JMenuBar {
         atualizarDadosItem.addActionListener((e) -> {
             controller.updateLocalObjeto(new Date(), DateUtils.plusDays(new Date(), 7));
             results.atualizaTable();
+            graficoAtividadeRecentes.criaGrafico();
         });
         resultadosItem = new JMenuItem("Resultados");
         resultadosItem.addActionListener((e) -> {

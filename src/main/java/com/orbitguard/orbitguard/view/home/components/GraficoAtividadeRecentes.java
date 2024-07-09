@@ -30,6 +30,13 @@ public class GraficoAtividadeRecentes extends JPanel {
     public void init() {
         this.setLayout(new BorderLayout(10, 10));
         this.setBackground(Color.GRAY);
+        
+        criaGrafico();
+    }
+    
+    public void criaGrafico() {
+        this.removeAll();
+        
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         List<Object[]> objs = controller.getCountByDate();
         for (Object[] o : objs) {
@@ -67,6 +74,6 @@ public class GraficoAtividadeRecentes extends JPanel {
         chart.getCategoryPlot().getRenderer().setSeriesPaint(0, Color.RED);
         ChartPanel grafico = new ChartPanel(chart);
         grafico.setBackground(Color.GRAY);
-        add(grafico, BorderLayout.CENTER);
+        this.add(grafico, BorderLayout.CENTER);
     }
 }
