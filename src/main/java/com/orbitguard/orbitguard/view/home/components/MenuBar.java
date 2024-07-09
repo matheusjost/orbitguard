@@ -57,8 +57,10 @@ public class MenuBar extends JMenuBar {
     public void init() {
         Icon homeIcon = new ImageIcon((FileSystems.getDefault().getPath("")).toAbsolutePath()
                 + "src/main/java/com/orbitguard/orbitguard/view/assets/icons/home.svg");
-        homeButton = new JButton("", homeIcon);
-
+        homeButton = new JButton("Home");
+        homeButton.setIcon(homeIcon);
+        homeButton.setBackground(Color.DARK_GRAY);
+        homeButton.setSize(60, 30);
         homeButton.addActionListener((ActionEvent e) -> {
             if (home == null) {
                 home = applicationContext.getBean(HomePanel.class);
@@ -70,7 +72,6 @@ public class MenuBar extends JMenuBar {
             parent.getContentPane().repaint();
             parent.getContentPane().revalidate();
         });
-        homeButton.setBackground(Color.red);
 
         arquivo = new JMenu("Arquivo");
         dashboardItem = new JMenuItem("Dashboard");
@@ -84,13 +85,12 @@ public class MenuBar extends JMenuBar {
         dados = new JMenu("Dados");
         atualizarDadosItem = new JMenuItem("Atualizar Dados");
         atualizarDadosItem.addActionListener((e) -> {
-        
-                controller.updateLocalObjeto(new Date(), DateUtils.plusDays(new Date(), 7));
+            controller.updateLocalObjeto(new Date(), DateUtils.plusDays(new Date(), 7));
             results.atualizaTable();
             graficoAtividadeRecentes.criaGrafico();
-            JOptionPane.showMessageDialog(null, "Sucesso ao atualizar dados", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-          
-            
+            JOptionPane.showMessageDialog(null, "Sucesso ao atualizar dados", "Sucesso",
+                    JOptionPane.INFORMATION_MESSAGE);
+
         });
         resultadosItem = new JMenuItem("Resultados");
         resultadosItem.addActionListener((e) -> {
